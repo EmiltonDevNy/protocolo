@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nytec</title>
+</head>
+<body>
+    <div class="container">
+        <form id="formulario">
+            <div class="row">
+                <div class="col">
+                    <label for="formGroupExampleInput">Renavam</label>
+                    <input type="number" class="form-control" id="renavam" placeholder="Insira o Renavam">   
+                </div>
+                <div class="col">
+                    <label for="formGroupExampleInput2">Protocolo</label>
+                    <input type="text" class="form-control" id="protocolo" placeholder="Insira o protocolo">
+                    <small id="protocoloHelp" class="form-text text muted"></small>
+                </div>
+            </div>
+            <br>
+            
+            <div class="d-flex justify-content-around">
+                <a href="http://online.sefaz.am.gov.br/ipva/ipva.asp" class="btn btn-primary">Consultar Sefaz</a>
+                <button type="submit" class="btn btn-danger" >Cancelar Protocolo</button>
+                <a href="https://digital.detran.am.gov.br/" class="btn btn-success">Pesquisar Protocolo</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    var form = document.getElementById('formulario');
+    var renavam = document.getElementById('renavam');
+    var protocolo = document.getElementById('protocolo');
+    var final = "http://boleto.nyata.com.br/protocolo-cancelar?protocolo=201906283740&renavam=306670690"
+    var form = document.getElementById('formulario');
+    function formatarProtocolo(p) {
+        var protocolo = p.slice(8,12) + p.slice(6,8) + p.slice(4,6) + p.slice(0,4);
+        return protocolo;
+    }
+    form.addEventListener('submit', function (e) {
+        var renavam = document.getElementById('renavam').value;
+        var protocolo = document.getElementById('protocolo').value;
+        protocolo = formatarProtocolo(protocolo);
+        var final = "http://boleto.nyata.com.br/protocolo-cancelar?protocolo="+ protocolo+"&renavam="+ renavam;
+        window.open(final, "minhaJanela", "height=182,width=298");
+        // impede o envio do form
+        e.preventDefault();
+    });
+
+</script>
